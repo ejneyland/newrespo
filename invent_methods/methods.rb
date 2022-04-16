@@ -6,8 +6,16 @@ def welcome
     puts Rainbow("Welcome to the #{@name}!").red
 end
 
-def view_stocklist
+def display_stocklist
+    break_line
+    puts Rainbow("ID").orange + " "*10 + "Make" + " "*6 + "Model" + " "*15 + "Type" + " "*15 + Rainbow("Qty").red
+    break_line
+    @products = @products.each do |product|
+        puts "#{product[:id]}" + " "*(12 - product[:id].length) + "#{product[:make]}" + " "*(10 - product[:make].length) + "#{product[:model]}" + " "*(20 - product[:model].length) + "#{product[:type]}" + " "*(20 - product[:type].length) + "#{product[:quantity]}"
+    end
+    break_line
 end
+
 
 def view_manuf_list
 end
@@ -22,15 +30,35 @@ def exit_cont
     end
     case exit_cont
     when 1
-        puts "here is a product"
-        user = gets.chomp
+        puts "Select a product"
+        select_product
     when 2
         puts "okay"
     end
 end
 
-def display_stocklist
+def select_product
     @products.each do |product|
-        puts product(id, make, model, type, quantity)
-    end 
+        list = product[:id].each
+        prompt = TTY::Prompt.new.select("Choose your letter?", list, per_page: 4)
+    end
+#   selection = TTY::Prompt.new.select(Rainbow("Select a product").yellow) do |menu|
+#         menu.choice("ACVSV6", 1)
+#         menu.choice("ACVNV8", 2)
+#         menu.choice("XB9C799A", 3)
+#         menu.choice("XD9C799A", 4)
+#     end  
 end
+
+def break_line
+    puts "-----------------------------------------------------------------"
+end
+
+def smaller_line
+    puts "------------------------------"
+end
+
+def clear
+    puts "\e[2J\e[f"
+end
+

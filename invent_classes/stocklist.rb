@@ -13,6 +13,9 @@
 {id: "XA17260CB", make: "Ford", model: "Falcon XA/XC V8", type: "Speedo Cable", quantity: 1}
 ]
 
+
+
+
 # Product << @products
 # Stocklist << Product
 
@@ -22,13 +25,14 @@ class Stocklist
     def initialize(name, products)
         @name = name
         @products = products
-        @product = product
     end
 
     def add_product(id, make, model, type, quantity)
         product = Product.new(id, make, model, type, quantity)
         @products << product
     end
+
+    
 
     # invoices = JSON.load_file("./sample_invoices.json", symbolize_keys: true)
 
