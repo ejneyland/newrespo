@@ -1,5 +1,3 @@
-
-
 class Product
 
     attr_reader :id, :make, :model, :type
