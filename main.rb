@@ -1,7 +1,7 @@
 require_relative './invent_classes/inventory'
 require_relative './invent_classes/stocklist'
-# require_relative './invent_classes/manulist'
-# require_relative './invent_classes/invoice'
+require_relative './invent_classes/manulist'
+require_relative './invent_classes/invoice'
 require_relative './invent_classes/product'
 require_relative './invent_methods/methods'
 require_relative './spec/inventory_spec'
@@ -25,6 +25,7 @@ require 'rainbow'
 ]
 
 stocklist = Stocklist.new(@name, @products)
+@manulist = Manulist.new(@name, @manu_items)
 
 welcome
 
@@ -43,8 +44,7 @@ loop do
             exit_cont
 
         when 2
-            view_manuf_list
-            exit_cont
+            display_manulist
 
         when 3
             process_invoice
