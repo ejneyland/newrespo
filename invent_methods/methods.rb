@@ -47,36 +47,42 @@ def product_type
 end
 
 def yes_no
-    yes_no = TTY::Prompt.new.select(Rainbow("Would you like to add this product to the manufacturing list?").green) do |menu|
-        menu.choice("Yes", 1)
-        menu.choice("No", 2)
+    while true
+        yes_no = TTY::Prompt.new.select(Rainbow("Would you like to add this product to the manufacturing list?").green) do |menu|
+            menu.choice("Yes", 1)
+            menu.choice("No", 2)
+        end
+        case 
+        when 1
+            how_many
+        when 2
+            break
+        end
     end
+end
+
+def how_many
+    puts Rainbow("How many?").green
+    amount = gets.chomp.to_i
+    clear
+    chosen_product = @products.find { |product| product[:id] == @response }
+    @manu_items.add_manu_item(chosen_product, amount)
+
+    puts Rainbow("Confirmed. You just added #{amount} of #{response} to the manufacturing list.").green
+    puts "(hit enter to continue)"
+    continue = gets
+    break_line
 end
 
 def choose_product
     puts Rainbow("Enter in a product ID for more options. E.g. ACVSV6").green
-    response = gets.chomp.upcase
+    @response = gets.chomp.upcase
     clear
-    if @products.find { |product| product[:id] == response }
-        puts Rainbow(@products.find { |product| product[:id] == response }[:id]).yellow
-        puts "Quantity: " + "#{@products.find { |product| product[:id] == response }[:quantity]}"
+    if @products.find { |product| product[:id] == @response }
+        puts Rainbow(@products.find { |product| product[:id] == @response }[:id]).yellow
+        puts "Quantity: " + "#{@products.find { |product| product[:id] == @response }[:quantity]}"
     end
-        yes_no
-            case
-            when 1
-                puts Rainbow("How many?").green
-                amount = gets.chomp.to_i
-                clear
-                chosen_product = @products.find { |product| product[:id] == response }
-                @manu_items.add_manu_item(chosen_product, amount)
-
-                puts Rainbow("Confirmed. You just added #{amount} of #{response} to the manufacturing list.").green
-                puts "(hit enter to continue)"
-                continue = gets
-                break_line
-            when 2
-                puts "Okay"
-            end
+    yes_no
 end
 
 def mark_complete
@@ -94,4 +100,3 @@ end
 def clear
     puts "\e[2J\e[f"
 end
-

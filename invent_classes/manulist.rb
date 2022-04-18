@@ -27,6 +27,7 @@ class Manulist
         smaller_line
         puts " "*6 + Rainbow("ID").orange + " "*12 + Rainbow("Qty").red
         smaller_line
+        puts "  ** products listed here ** "
         @manu_items
         smaller_line
     end
