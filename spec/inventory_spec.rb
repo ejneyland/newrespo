@@ -79,27 +79,20 @@ describe Stocklist do
         stocklist.add_product(id, make, model, type, quantity)
         expect(stocklist.products.length).to be(1)
     end
-        #     it 'should be able to display a product' do
-        #     end
-
-        #     it 'should be able to update a products quantity' do
-        #     end
 end
 
 describe Manulist do
     it 'should be able to add a product' do
-        name = "Manufacturing List"
-        items = 
-        manulist = Manulist.new(name, items)
         id = "ACVSV6"
         quantity = 1
+        manulist = Manulist.new(@manu_items)
+        @manu_items = []
         manulist.add_manu_item(id, quantity)
         expect(manulist.manu_items.length).to be(1)
     end
     it 'should update an item quantity' do
         name = "Manufacturing List"
-        items = 
-        manulist = Manulist.new(name, items)
+        manulist = Manulist.new(@manu_items)
         id = "ACVSV6"
         quantity = 1
         quantity_add = 2

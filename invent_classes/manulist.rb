@@ -12,10 +12,10 @@ class Manulist
         @manu_items
     end
 
-    # def add_manu_item(id, quantity)
-    #     manu_item = ManuItem.new(id, quantity)
-    #     @manu_items << manu_item
-    # end
+    def add_manu_item(id, quantity)
+        manu_item = ManuItem.new(id, quantity)
+        @manu_items << manu_item
+    end
 
     def upsert_manu_item(id, quantity)
         @manu_items[id] = @manu_items[id] ? @manu_items[id] + quantity : quantity
